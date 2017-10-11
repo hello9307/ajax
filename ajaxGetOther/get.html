@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+<!-- <form> -->
+	<input type="text">
+	<input type="password">
+	<button>submit</button>
+<!-- </form> -->
+<!-- form和AJAX不能一起用 -->
+<div id="myContent">here will change</div>
+<script>
+	var btn=document.getElementsByTagName("button")[0];
+	btn.onclick=function(){
+		var xmlhttp;
+		if(XMLHttpRequest){
+			xmlhttp=new XMLHttpRequest();
+		}else{
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open("get","get.php?userName="+document.getElementsByTagName("input")[0].value);
+
+		// post要如下使用
+		// xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		// xmlhttp.send("fname=Bill&lname=Gates");
+
+		xmlhttp.send();
+		xmlhttp.onreadystatechange=function(){
+			if(xmlhttp.readyState==4&&xmlhttp.status==200){
+				var arr=xmlhttp.responseXML.querySelectorAll("person");
+				var str="<table>"
+				for(var i=0;i<arr.length;i++){
+					str+="<tr>"
+					str+="<td>"+arr[i].querySelector("name").innerHTML+"</td>";
+					str+="<td>"+arr[i].querySelector("age").innerHTML+"</td>";
+					str+="<td>"+arr[i].querySelector("skill").innerHTML+"</td>";
+					str+="</tr>"
+				}
+				str+="</table>";
+				console.log(str);
+				document.getElementById("myContent").innerHTML=str;
+			}
+		}
+	}
+</script>
+</body>
+</html>

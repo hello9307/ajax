@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<student>
+	<person>
+		<name>zhangsan</name>
+		<age>18</age>
+		<skill>eat</skill>
+	</person>
+	<person>
+		<name>lisi</name>
+		<age>22</age>
+		<skill>dance</skill>
+	</person>
+</student>
